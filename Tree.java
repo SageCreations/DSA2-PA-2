@@ -194,7 +194,8 @@ public class Tree {
             while(globalStack.isEmpty()==false) {
                 Node temp = (Node)globalStack.pop();
                 if(temp != null) {
-                    System.out.print(temp.iData);
+                    //System.out.print(temp.iData);
+                    temp.displayNode();
                     localStack.push(temp.leftChild);
                     localStack.push(temp.rightChild);
                     if(temp.leftChild != null || temp.rightChild != null)
@@ -213,4 +214,25 @@ public class Tree {
         } // end while isRowEmpty is false
         System.out.println( "......................................................");
     } // end displayTree() // -------------------------------------------------------------
+
+
+    // Programming Assignment 2 related stuff - PA2
+
+    // method: assignLevels
+    // populate the newly defined level attribute for the already positioned Node objects
+    public void assignLevels() {
+        assignLevels(root, 0);
+    }
+
+    private void assignLevels(Node localRoot, int counter) {
+        //same logic as preorder traversal
+        if(localRoot != null) {
+            localRoot.level = counter;
+            assignLevels(localRoot.leftChild, ++counter);
+            assignLevels(localRoot.rightChild, counter);
+        }
+    }
+
+
+
 } // end class Tree ////////////////////////////////////////////////////////////////

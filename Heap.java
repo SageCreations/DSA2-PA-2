@@ -85,10 +85,13 @@ class Heap {
     public void displayHeap() {
         System.out.print("heapArray: "); // array format
         for(int m=0; m<currentSize; m++)
-            if(heapArray[m] != null)
-                System.out.print( heapArray[m].getKey() + " ");
-            else
-                System.out.print( "-- ");
+            if(heapArray[m] != null) {
+                //System.out.print( heapArray[m].getKey() + " ");
+                heapArray[m].displayNode();
+                System.out.print(", ");
+            } else {
+                System.out.print("-- : -- ");
+            }
 
         System.out.println(); // heap format
         int nBlanks = 32;
@@ -103,9 +106,10 @@ class Heap {
         {
             if (column == 0) // first item in row?
                 for (int k = 0; k < nBlanks; k++) // preceding blanks
-                    System.out.print(' '); // display item
+                    System.out.print(" "); // display item
 
-            System.out.print(heapArray[j].getKey());
+            //System.out.print(heapArray[j].getKey());
+            heapArray[j].displayNode();
 
             if (++j == currentSize) // done?
                 break;
@@ -118,10 +122,37 @@ class Heap {
                 System.out.println(); // new row
             } else // next item on row
                 for (int k = 0; k < nBlanks * 2 - 2; k++)
-                    System.out.print(' '); // interim blanks
+                    System.out.print(" "); // interim blanks
 
         } // end for
 
         System.out.println("\n"+dots+dots); // dotted bottom line
     } // end displayHeap() // -------------------------------------------------------------
+
+
+    // Programming Assignment 2 related stuff - PA2
+
+    // method: assignLevels
+    // populate the newly defined level attribute for the already positioned Node objects
+    public void assignLevels() {
+        if (currentSize > 0) {
+            assignLevels(0, 0, 1, 0);
+        }
+    }
+
+    // Same logic used in displayHeap(), just refactored the while loop into a recursive form.
+    private void assignLevels(int index, int column, int itemsPerRow, int counter) {
+        heapArray[index].level = counter;
+
+        if (++index != currentSize) {
+            if (++column == itemsPerRow) {
+                assignLevels(index, 0, itemsPerRow * 2, ++counter);
+            } else {
+                assignLevels(index, column, itemsPerRow, counter);
+            }
+        }
+    }
+
+
+
 } // end class Heap ////////////////////////////////////////////////////////////////
