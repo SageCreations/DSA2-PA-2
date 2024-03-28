@@ -5,12 +5,12 @@ public class Main {
     static Scanner scan = new Scanner(System.in);
 
     /* some words for testing use.
-    * QUICKBROWNFOX
+    * DRUNK
+    * QUIZ
+    * BLIMP
+    * WALTZ
     * JUMBO
-    * VEXED
-    * GYPSY
     * FLUX
-    * DWELL
     * ZEBRA
     * KNIGHT
     * MYTH
@@ -54,7 +54,21 @@ public class Main {
         myHeap.assignLevels();
         displayHeap(myHeap);
 
-        System.out.println("");
+        System.out.println("\n\n\n");
+
+        System.out.println("Experiment 1: -----------------------------");
+        System.out.print("BST: ");
+        myTree.displayHalfTree(false);
+        System.out.print("Heap: ");
+        myHeap.displayHalfHeap();
+
+        System.out.println("\n\n\n");
+
+
+        Node[] myBSTArray = myTree.TreeToArray();
+        for (Node element : myBSTArray) {
+            element.displayNode();
+        }
 
 
 

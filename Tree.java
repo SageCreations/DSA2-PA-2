@@ -160,7 +160,9 @@ public class Tree {
     } // -------------------------------------------------------------
     private void preOrder(Node localRoot) {
         if(localRoot != null) {
-            System.out.print(localRoot.iData + " ");
+            //System.out.print(localRoot.iData + " ");
+            localRoot.displayNode();
+            System.out.print(" ");
             preOrder(localRoot.leftChild);
             preOrder(localRoot.rightChild);
         }
@@ -226,11 +228,70 @@ public class Tree {
 
     private void assignLevels(Node localRoot, int counter) {
         //same logic as preorder traversal
-        if(localRoot != null) {
+        if (localRoot != null) {
             localRoot.level = counter;
             assignLevels(localRoot.leftChild, ++counter);
             assignLevels(localRoot.rightChild, counter);
         }
+    }
+
+    // Experiment 1:
+    // Display the root and the nodes/letters in its right 
+    // subtree in the BST on one line as a set of letters and not a tree
+    //    used the parameter to see if what I observed for the expierment was reflected
+    public void displayHalfTree(boolean displayLeftSide) {
+        // display root
+        //System.out.print(root.iData + " ");
+        root.displayNode();
+        System.out.print(" ");
+        // if true start a preorder recursion with the roots left child
+        if (displayLeftSide) {
+            preOrder(root.leftChild);
+        } else { // otherwise start the recursion with the roots right child
+            preOrder(root.rightChild);
+        }
+        
+        System.out.println("");
+    }
+
+    public Node[] TreeToArray() {
+        //System.out.println(GetMaxArraySize());
+        Node[] arr = new Node[GetMaxArraySize()]; // went on a side quest here
+        LinkQueue traversal = new LinkQueue(); // same concept from Option 6 of the previous assignment
+        traversal.insert(root);
+
+        int index = 0;
+        while (!traversal.isEmpty()) {
+            arr[index++] = traversal.remove();
+        }
+
+        return arr;
+    }
+
+    private int GetMaxArraySize() {
+        System.out.println(GetMaxLevel(root, 0, 0));
+        return power(2, GetMaxLevel(root, 0, 0));
+    }
+
+    private int power(int base, int exp) {
+        if (exp == 0) {
+            return 0;
+        } else {
+            return base * power(base, exp - 1);
+        }
+    }
+    
+    //TODO: get maxCount to return the highest counter count.
+    private int GetMaxLevel(Node localRoot, int counter, int maxCount) {
+        if (localRoot != null) {
+            if (maxCount < counter) {
+                maxCount = counter;
+            }
+            System.out.println(maxCount);
+            GetMaxLevel(localRoot.leftChild, ++counter, maxCount);
+            GetMaxLevel(localRoot.rightChild, counter, maxCount);
+        }
+        return maxCount;
     }
 
 

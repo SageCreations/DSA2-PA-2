@@ -154,5 +154,20 @@ class Heap {
     }
 
 
+    // Experiment 1:
+    // display the nodes in the first half of the array storing the Heap
+    // on the next line. 
+    public void displayHalfHeap() {
+        if (currentSize > 0) {
+            for (int i = 0; i < maxSize/2; i++) {
+                //System.out.print(heapArray[i].iData + " ");
+                heapArray[i].displayNode();
+                System.out.print(" ");
+            }
+        }
+        System.out.println(" ");
+    }
+
+
 
 } // end class Heap ////////////////////////////////////////////////////////////////

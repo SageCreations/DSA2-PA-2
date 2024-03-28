@@ -1,0 +1,28 @@
+Experiment 1. 
+
+Display the root and the nodes/letters in its right subtree in 
+the BST on one line as a set of letters and not a tree; 
+
+
+display the nodes in the first half of the array storing the Heap on the next 
+line. 
+
+
+What pattern do you see? 
+- The BST displays the same if not more letters than the first half of the heap 
+on a more than likely average.
+
+
+Explain your take on this pattern and how you can or cannot justify
+it as a reliable pattern. 
+- In most cases I've seen that the BST displays the same amount of 
+letters if the root happens to be in the later end of the alphabet.
+If the root happens to be about the first 60-70% of the alphabet, 
+it is practically guaranteed to bigger than half the heap. I cannot justify 
+this pattern being reliable as I have already run into a case 
+that breaks mey observation patter with the small pool of 11 words 
+I used for test purposes.
+
+
+Refer to this by Experiment 1 in your report.
+
