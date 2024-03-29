@@ -82,13 +82,17 @@ class Heap {
         return true;
     } // end change() // -------------------------------------------------------------
 
-    public void displayHeap() {
+    public void displayHeap(boolean withLevels) {
         System.out.print("heapArray: "); // array format
         for(int m=0; m<currentSize; m++)
             if(heapArray[m] != null) {
-                //System.out.print( heapArray[m].getKey() + " ");
-                heapArray[m].displayNode();
-                System.out.print(", ");
+                if (!withLevels) {
+                    System.out.print( heapArray[m].getKey() + " ");
+                } else {
+                    heapArray[m].displayNode();
+                    System.out.print(", ");
+                }
+                
             } else {
                 System.out.print("-- : -- ");
             }
@@ -108,8 +112,12 @@ class Heap {
                 for (int k = 0; k < nBlanks; k++) // preceding blanks
                     System.out.print(" "); // display item
 
-            //System.out.print(heapArray[j].getKey());
-            heapArray[j].displayNode();
+            
+            if (!withLevels) {
+                System.out.print(heapArray[j].getKey());
+            } else {
+                heapArray[j].displayNode();
+            }
 
             if (++j == currentSize) // done?
                 break;
@@ -167,6 +175,7 @@ class Heap {
         }
         System.out.println(" ");
     }
+    
 
 
 

@@ -255,43 +255,74 @@ public class Tree {
     }
 
     public Node[] TreeToArray() {
-        //System.out.println(GetMaxArraySize());
-        Node[] arr = new Node[GetMaxArraySize()]; // went on a side quest here
-        LinkQueue traversal = new LinkQueue(); // same concept from Option 6 of the previous assignment
+        int maxSize = GetMaxArraySize(); // went on a side quest here
+        Node[] arr = new Node[maxSize]; 
+        
+        // same concept from the Option 6 I created from the previous assignment
+        LinkQueue traversal = new LinkQueue(); 
         traversal.insert(root);
 
+        // Using the LinkQueue to traverse through the tree in order of left-to-right, top-down;
+        // I believe this makes it easier to insert nodes into the array while keeping null spacing
+        // by just inserting temporary nodes. At least without using standard libraries. (like the displayTree from the book.)
         int index = 0;
+        arr[index] = root;        
         while (!traversal.isEmpty()) {
-            arr[index++] = traversal.remove();
-        }
+            Node current = traversal.remove(); // current node, updates at same rate with index
+            
+            // perform left child insertion or just keep track of spacing
+            if (current.leftChild != null) {
+                traversal.insert(current.leftChild);
+                arr[2*index+1] = current.leftChild;
+            } else { 
+                if (2*index+1 < maxSize) {
+                    Node temp = new Node('-');
+                    traversal.insert(temp);
+                }
+            }
+            
+            // perform right child insertion or just keep track of spacing
+            if (current.rightChild != null) {
+	            traversal.insert(current.rightChild);
+                arr[2*index+2] = current.rightChild;
+	        } else { 
+                if (2*index+2 < maxSize) {
+                    Node temp = new Node('-');
+                    traversal.insert(temp);
+                }
+            }
 
-        return arr;
+            index++; // update index
+        }
+        return arr; // return the newly made array.
     }
 
     private int GetMaxArraySize() {
-        System.out.println(GetMaxLevel(root, 0, 0));
-        return power(2, GetMaxLevel(root, 0, 0));
+        return power(2, GetMaxLevel(root, 0) + 1) - 1;
     }
 
     private int power(int base, int exp) {
         if (exp == 0) {
-            return 0;
+            return 1;
         } else {
             return base * power(base, exp - 1);
         }
     }
     
-    //TODO: get maxCount to return the highest counter count.
-    private int GetMaxLevel(Node localRoot, int counter, int maxCount) {
+    // Essentially the same thing as the assignLevels logic just 
+    // actually returned the highest counter gets recorded at.
+    private int GetMaxLevel(Node localRoot, int counter) {
         if (localRoot != null) {
-            if (maxCount < counter) {
-                maxCount = counter;
+            int left = GetMaxLevel(localRoot.leftChild, ++counter);
+            int right = GetMaxLevel(localRoot.rightChild, counter);
+
+            if (left >= right) {
+                return left;
+            } else {
+                return right;
             }
-            System.out.println(maxCount);
-            GetMaxLevel(localRoot.leftChild, ++counter, maxCount);
-            GetMaxLevel(localRoot.rightChild, counter, maxCount);
         }
-        return maxCount;
+        return counter - 1;
     }
 
 

@@ -26,3 +26,56 @@ I used for test purposes.
 
 Refer to this by Experiment 1 in your report.
 
+
+
+
+
+
+
+
+
+
+Experiment 2. 
+
+Is this Heap identical to the Heap that you created straight from the user input? 
+- No, it seams that the levels are preserved but the order within the 
+level and sibling are at risk of being flipped. I did not see an scenarios 
+where the entire tree is flipped or anthing of that nature. It seems to be 
+an issue only pertaining at a sibling scope. If the siblings are flipped then 
+of course this can cause the rest of the tree to be flipped/mirrored from 
+that level onward. From my observations however the Tree display of the Heap was 
+always the same shape and only had flipped siblings.
+
+
+Does it matter how the Heap looks like? 
+- I would say yes becase if the Heap formed from the BST Array did not 
+come out atleast with the same tree structure display as the original 
+then that would be a major indicator of not all nodes being transferred 
+across the manipulations in creating the Heap. The reason as to why is 
+because the heap uses a specific procedure to display the nodes from the 
+array to a tree like structure. If they were not the same, then it would 
+mean that the Heap had either been manipulated with insertions/removes 
+before its construction or the coping of the array over to the heap was 
+majorly flawed and had skipped over some nodes. (Note: I realized after the fact 
+that these statements are only true because of the way I inserted the Letters 
+in the original Heap. The original was a gapless array and organized using 
+trickleUp() at each insertion.)
+
+
+Discuss your take on whether you find it necessary for the Heap to be 
+configured a certain way for it to function properly and whether their 
+configuration of nodes can impact their algorithmic applications. 
+- The book mentions how to sort a heap by using an array to dump the heap 
+into an array with remove() so that trickleDown() gets applied to every subtree as 
+nodes leave. Then insert it back into the heap and removing them again should 
+return a sorted array. As long as trickleDown and trickleUp are configured 
+properly than it shouldn't matter for the heap. It can be fixed by just repeating 
+the steps above so that it can be ready for and algorithmic applications. 
+
+
+You need to present your argument in a clear, organized and logically 
+sound structure to secure the full credit. 
+
+A simple yes or no, or inadequate explanation will not earn points.
+
+
